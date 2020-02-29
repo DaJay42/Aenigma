@@ -1,0 +1,8 @@
+
+allprojects {
+    group 'jay.aenigma'
+    version '0.1'
+
+    // Always show stacktrace
+    gradle.startParameter.showStacktrace = ShowStacktrace.ALWAYS
+}

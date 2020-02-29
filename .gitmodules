@@ -1,0 +1,3 @@
+[submodule "external/apted"]
+	path = external/apted
+	url = https://github.com/DatabaseGroup/apted.git

@@ -1,0 +1,63 @@
+
+plugins {
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+    id 'java'
+    id 'application'
+    //id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'antlr'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = '10'
+targetCompatibility = '10'
+
+/*
+javafx {
+	version = '13'
+    modules = [
+		'javafx.base',
+		'javafx.controls',
+		'javafx.graphics'
+	]
+    //configuration = 'compileOnly'
+}
+*/
+
+compileJava {
+    options.encoding = "UTF-8"
+}
+
+sourceSets {
+    main {
+        java {
+            // include APTED
+            srcDir '../external/apted/src/main/java'
+            // but not the deprecated parts
+            exclude 'costmodel/**'
+            exclude 'distance/**'
+            exclude 'node/**'
+            exclude 'parser/**'
+        }
+    }
+}
+
+dependencies {
+    antlr("org.antlr:antlr4:4.8")
+    implementation("org.antlr:antlr4-runtime:4.8")
+}
+
+generateGrammarSource {
+    arguments += ["-visitor"]
+}
+
+mainClassName = 'jay.aenigma.gui.Gui'
+
+shadowJar {
+    archiveFileName = 'Aenigma.jar'
+    exclude 'LICENSE'
+    exclude 'META-INF/maven/**'
+    minimize()
+}
